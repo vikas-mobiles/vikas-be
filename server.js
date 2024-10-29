@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import productRoutes from '../server/routes/productRoutes.js';
-import orderRoutes from '../server/routes/orderRoutes.js';
-import contactRoutes from '../server/routes/contactRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 import 'dotenv/config';
 
 const app = express();
@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .then(() => console.log('MongoDB connected'))
   .catch((error) => console.log('Error connecting to MongoDB:', error));
 
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 
 // Routes
 app.use('/api/products', productRoutes);
