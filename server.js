@@ -19,6 +19,13 @@ app.use((req, res, next) => {
 });
 
 
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; font-src 'self' https://vikas-be.onrender.com https://fonts.gstatic.com; style-src 'self' https://fonts.googleapis.com; script-src 'self' https://vercel.live; connect-src 'self' https://vikas-be.onrender.com;"
+  );
+  next();
+});
 
 // Check if MONGO_URI is accessible
 // console.log('MongoDB URI:', process.env.MONGO_URI);
@@ -28,13 +35,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .catch((error) => console.log('Error connecting to MongoDB:', error));
 
 // mongoose.set('debug', true);
-app.use((req, res, next) => {
-  res.setHeader(
-    "Content-Security-Policy",
-    "default-src 'self'; font-src 'self' https://vikas-be.onrender.com;"
-  );
-  next();
-});
+
 
 // Routes
 app.use('/api/products', productRoutes);
